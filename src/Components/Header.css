@@ -1,0 +1,23 @@
+.header {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e8;
+}
+
+.header-container {
+    max-width: 1200px;
+    height: 72px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    color: #1b1b2b;
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-decoration: none;
+}

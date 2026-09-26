@@ -1,0 +1,389 @@
+.files-section {
+    width: 100%;
+    padding: 72px 24px 100px;
+    background: #fafafb;
+    border-top: 1px solid #e5e5e8;
+}
+
+.files-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   Header
+======================================== */
+
+.files-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e5e5e8;
+}
+
+.files-header h2 {
+    margin: 0;
+    color: #1b1b2b;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+}
+
+.files-header p {
+    margin: 7px 0 0;
+    color: #6b6b7d;
+    font-size: 13px;
+}
+
+.file-count {
+    color: #6b6b7d;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    white-space: nowrap;
+}
+
+/* ========================================
+   Toolbar
+======================================== */
+
+.file-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.search-box {
+    width: 400px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    background: #ffffff;
+    border: 1px solid #e5e5e8;
+    border-radius: 7px;
+    color: #6b6b7d;
+}
+
+.search-box:focus-within {
+    border-color: #1b1b2b;
+}
+
+.search-box input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #1b1b2b;
+    font-size: 12px;
+}
+
+.search-box input::placeholder {
+    color: #8b8b98;
+}
+
+/* ========================================
+   Dropdown filters
+======================================== */
+
+.select-group {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-select {
+    height: 36px;
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 12px;
+    background: #ffffff;
+    border: 1px solid #e5e5e8;
+    border-radius: 7px;
+    color: #1b1b2b;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.filter-select:hover {
+    border-color: #c9c9d0;
+}
+
+/* ========================================
+   Size filters
+======================================== */
+
+.size-filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 14px;
+}
+
+.size-label {
+    margin-right: 3px;
+    color: #6b6b7d;
+    font-size: 11px;
+}
+
+.size-button {
+    height: 24px;
+    padding: 0 11px;
+    background: #ffffff;
+    border: 1px solid #e5e5e8;
+    border-radius: 20px;
+    color: #6b6b7d;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.size-button:hover {
+    border-color: #1b1b2b;
+    color: #1b1b2b;
+}
+
+.size-button.active {
+    background: #1b1b2b;
+    border-color: #1b1b2b;
+
+    color: #ffffff;
+}
+
+/* ========================================
+   File grid
+======================================== */
+
+.file-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 32px;
+}
+
+/* ========================================
+   File card
+======================================== */
+
+.file-card {
+    min-height: 185px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e5e8;
+    border-radius: 10px;
+
+    transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+}
+
+.file-card:hover {
+    border-color: #d2d2d8;
+
+    box-shadow: 0 3px 12px rgba(27, 27, 43, 0.04);
+}
+
+/* ========================================
+   Card top
+======================================== */
+
+.file-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.file-type {
+    display: inline-flex;
+    align-items: center;
+
+    height: 18px;
+
+    padding: 0 7px;
+
+    background: #f5f5f7;
+
+    border-radius: 4px;
+
+    color: #1b1b2b;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.file-type-icon {
+    color: #6b6b7d;
+}
+
+/* ========================================
+   File details
+======================================== */
+
+.file-details {
+    margin-top: 12px;
+}
+
+.file-details h3 {
+    margin: 0;
+
+    color: #1b1b2b;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.file-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    margin: 5px 0 0;
+
+    color: #6b6b7d;
+
+    font-size: 11px;
+}
+
+.file-description {
+    margin: 12px 0 0;
+
+    color: #6b6b7d;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* ========================================
+   Card actions
+======================================== */
+
+.file-card-actions {
+    display: flex;
+
+    gap: 7px;
+
+    margin-top: auto;
+    padding-top: 14px;
+
+    border-top: 1px solid #f0f0f2;
+}
+
+.download-button {
+    flex: 1;
+
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    background: #1b1b2b;
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: background 150ms ease;
+}
+
+.download-button:hover {
+    background: #29293b;
+}
+
+.copy-button {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e5e8;
+    border-radius: 6px;
+
+    color: #6b6b7d;
+
+    cursor: pointer;
+}
+
+.copy-button:hover {
+    color: #1b1b2b;
+    border-color: #cfcfd5;
+}
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 900px) {
+    .file-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .file-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .select-group {
+        width: 100%;
+    }
+
+    .filter-select {
+        flex: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .files-section {
+        padding: 56px 16px 80px;
+    }
+
+    .files-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .file-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .select-group {
+        flex-direction: column;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+}
