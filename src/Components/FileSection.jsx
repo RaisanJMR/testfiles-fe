@@ -1,217 +1,91 @@
-import {
-    Search,
-    ChevronDown,
-    FileText,
-    Image,
-    Archive,
-    Video,
-    Box,
-    Database,
-    Download,
-    Copy,
-} from "lucide-react";
+import { Download } from "lucide-react";
+import { absoluteFileUrl, filePath } from "../data/files";
+import { useCopy } from "../hooks/useCopy";
 
-import "./FileSection.css";
+function FileRow({ file }) {
+  const { copied, copy } = useCopy();
+  const url = absoluteFileUrl(file.name);
 
-const files = [
-    {
-        id: 1,
-        name: "sample-100kb.pdf",
-        type: "PDF",
-        size: "100 KB",
-        category: "PDF Document",
-        description: "Sample PDF for upload and file validation testing",
-        icon: FileText,
-    },
-    {
-        id: 2,
-        name: "sample-1mb.jpg",
-        type: "JPG",
-        size: "1 MB",
-        category: "JPEG Image",
-        description: "Sample image for image upload testing",
-        icon: Image,
-    },
-    {
-        id: 3,
-        name: "sample-5mb.zip",
-        type: "ZIP",
-        size: "5 MB",
-        category: "Compressed Archive",
-        description: "Archive file for upload and extraction testing",
-        icon: Archive,
-    },
-    {
-        id: 4,
-        name: "sample-10mb.mp4",
-        type: "MP4",
-        size: "10 MB",
-        category: "Video Container",
-        description: "Video file for upload and streaming testing",
-        icon: Video,
-    },
-    {
-        id: 5,
-        name: "sample-25mb.bin",
-        type: "BIN",
-        size: "25 MB",
-        category: "Raw Binary",
-        description: "Binary file for file-size and storage testing",
-        icon: Box,
-    },
-    {
-        id: 6,
-        name: "sample-100mb.bin",
-        type: "BIN",
-        size: "100 MB",
-        category: "Large Binary",
-        description: "Large file for testing upload limits and performance",
-        icon: Database,
-    },
-];
+  return (
+    <article className="table-row">
+      <p className="file-title">{file.name}</p>
+      <span className="type-badge">{file.type}</span>
+      <p className="file-size text-sm ink">{file.size}</p>
+      <p className="file-use text-sm muted">{file.description}</p>
+      <div className="file-actions flex end gap-2">
+        <a className="btn btn-primary btn-sm" href={filePath(file.name)} download>
+          <Download size={14} aria-hidden="true" />
+          Download
+        </a>
+        <button type="button" className="btn btn-secondary btn-sm" onClick={() => copy(url)}>
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+    </article>
+  );
+}
 
-const sizes = [
-    "All",
-    "100 KB",
-    "500 KB",
-    "1 MB",
-    "5 MB",
-    "10 MB",
-    "50 MB",
-    "100 MB",
-];
+function FileSection({
+  files,
+  total,
+  query,
+  onQuery,
+  filtersActive,
+  onClear,
+}) {
+  const countLabel =
+    files.length === total
+      ? `${total} ${total === 1 ? "file" : "files"}`
+      : `${files.length} of ${total}`;
 
-function FileSection() {
-    return (
-        <section className="files-section" id="files">
-            <div className="files-container">
+  return (
+    <section className="stack gap-6 mt-12" id="files" aria-label="Library">
+      <div className="flex between baseline gap-4 wrap">
+        <div className="flex baseline gap-2">
+          <h2 className="section-title">Library</h2>
+          <span className="text-xs muted">{countLabel}</span>
+        </div>
+        {filtersActive && (
+          <button type="button" className="link" onClick={onClear}>
+            Show all files
+          </button>
+        )}
+      </div>
 
-                {/* Section header */}
+      <label className="w-search">
+        <span className="sr-only">Search files</span>
+        <input
+          className="input"
+          type="search"
+          value={query}
+          onChange={(event) => onQuery(event.target.value)}
+          placeholder="Search files"
+        />
+      </label>
 
-                <div className="files-header">
-                    <div>
-                        <h2>Download test files</h2>
-
-                        <p>
-                            Real, ready-to-use files for testing uploads, downloads,
-                            file validation, and application workflows.
-                        </p>
-                    </div>
-
-                    <span className="file-count">
-                        24 TEST FILES
-                    </span>
-                </div>
-
-                {/* Search + filters */}
-
-                <div className="file-toolbar">
-
-                    <div className="search-box">
-                        <Search size={16} />
-
-                        <input
-                            type="text"
-                            placeholder="Search files (e.g. pdf, 10mb, json)..."
-                        />
-                    </div>
-
-                    <div className="select-group">
-
-                        <button className="filter-select">
-                            All formats
-                            <ChevronDown size={15} />
-                        </button>
-
-                        <button className="filter-select">
-                            All sizes
-                            <ChevronDown size={15} />
-                        </button>
-
-                    </div>
-                </div>
-
-                {/* Size filters */}
-
-                <div className="size-filter">
-
-                    <span className="size-label">
-                        Size:
-                    </span>
-
-                    {sizes.map((size, index) => (
-                        <button
-                            key={size}
-                            className={`size-button ${index === 0 ? "active" : ""
-                                }`}
-                        >
-                            {size}
-                        </button>
-                    ))}
-
-                </div>
-
-                {/* Files */}
-
-                <div className="file-grid">
-
-                    {files.map((file) => {
-                        const Icon = file.icon;
-
-                        return (
-                            <article className="file-card" key={file.id}>
-
-                                <div className="file-card-top">
-
-                                    <span className="file-type">
-                                        {file.type}
-                                    </span>
-
-                                    <Icon
-                                        className="file-type-icon"
-                                        size={17}
-                                    />
-
-                                </div>
-
-                                <div className="file-details">
-
-                                    <h3>
-                                        {file.name}
-                                    </h3>
-
-                                    <p className="file-meta">
-                                        {file.size}
-                                        <span>·</span>
-                                        {file.category}
-                                    </p>
-                                    <p className="file-description">
-                                        {file.description}
-                                    </p>
-                                </div>
-                                <div className="file-card-actions">
-                                    <a
-                                        href={`/files/${file.name}`}
-                                        download
-                                        className="download-button"
-                                    >
-                                        <Download size={14} />
-                                        Download
-                                    </a>
-                                    <button
-                                        className="copy-button"
-                                        title="Copy file link"
-                                    >
-                                        <Copy size={15} />
-                                    </button>
-                                </div>
-                            </article>
-                        );
-                    })}
-                </div>
-            </div>
-        </section>
-    );
+      {files.length === 0 ? (
+        <div className="card empty stack center gap-2">
+          <p className="text-sm muted">No files match.</p>
+          <button type="button" className="link" onClick={onClear}>
+            Show all files
+          </button>
+        </div>
+      ) : (
+        <div className="table">
+          <div className="table-row table-head" aria-hidden="true">
+            <span>Name</span>
+            <span>Type</span>
+            <span>Size</span>
+            <span>Use</span>
+            <span />
+          </div>
+          {files.map((file) => (
+            <FileRow key={file.id} file={file} />
+          ))}
+        </div>
+      )}
+    </section>
+  );
 }
 
 export default FileSection;
